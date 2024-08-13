@@ -14,12 +14,21 @@ function addTask() {
   }
 }
 
+function removeTask(task) {
+  taskLists.removeChild(task);
+  saveTask();
+}
+
 function createTaskElement(taskName) {
   const taskEl = document.createElement("li");
   taskEl.className =
-    "bg-primary w-full h-16 rounded-md flex justify-center items-center text-neutral font-bold text-xl shadow-md";
+    "bg-primary w-full h-16 rounded-md flex justify-center items-center text-neutral font-bold text-xl shadow-md cursor-pointer";
   taskEl.textContent = taskName;
   taskLists.appendChild(taskEl);
+
+  taskEl.addEventListener("click", () => {
+    removeTask(taskEl);
+  });
 }
 
 function saveTask() {
