@@ -14,7 +14,7 @@ function addTask() {
   }
 }
 
-addBtn.addEventListener("click", addTask());
+addBtn.addEventListener("click", addTask);
 
 function removeTask(task) {
   taskLists.removeChild(task);
