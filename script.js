@@ -42,7 +42,7 @@ function saveTask() {
 }
 
 function loadTasks() {
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
   tasks.forEach((task) => {
     createTaskElement(task);
