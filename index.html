@@ -2,31 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Todo List</title>
-    <link href="./output.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todoey</title>
   </head>
-  <body
-    class="bg-base-500 min-h-screen flex flex-col justify-center items-center"
-  >
-    <h1 class="text-5xl font-bold">Todo List</h1>
-    <div class="mt-20 rounded-box bg-base-200 p-10 shadow-md">
-      <div class="flex gap-2">
-        <input
-          type="text"
-          placeholder="What do u want to do?"
-          class="input input-bordered w-full max-w-xs"
-          id="taskInput"
-        />
-        <button class="btn btn-secondary" id="addBtn">Add</button>
-      </div>
-
-      <ul
-        id="taskLists"
-        class="mt-8 flex flex-col items-center justify-center gap-2"
-      ></ul>
-    </div>
-
-    <script src="./script.js" type="module"></script>
+  <body class="h-screen bg-base-500">
+    <div id="root" class="h-screen"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
