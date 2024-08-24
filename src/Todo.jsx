@@ -1,28 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Todo() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")));
   const [newTask, setNewTask] = useState("");
 
-  function handleChange(event) {
-    setNewTask(event.target.value);
-  }
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
-  function addTask() {
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+
+  const addTask = () => {
     if (newTask.trim()) {
-      setTasks([...tasks, newTask]);
+      setTasks((prevTasks) => [...prevTasks, newTask]);
       setNewTask("");
     }
-  }
+  };
 
-  function removeTask(i) {
-    const updatedTasks = tasks.filter((_, index) => index != i);
-
-    setTasks(updatedTasks);
-  }
+  const removeTask = (index) => {
+    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
+  };
 
   return (
-    <div className="rounded-box max-w-96, mt-24 bg-base-200 p-10 shadow-md">
+    <div className="rounded-box max-w-96 mt-24 bg-base-200 p-10 shadow-md">
       <div className="flex gap-2">
         <input
           type="text"
