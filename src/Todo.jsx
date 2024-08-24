@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
 function Todo() {
-  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")));
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || [],
+  );
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
