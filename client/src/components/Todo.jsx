@@ -1,33 +1,46 @@
-import { useEffect, useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function Todo() {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks")) || [],
-  );
-  const [newTask, setNewTask] = useState("");
-
   const [listRef] = useAutoAnimate();
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+  const endpoint = "http://localhost:8080/todos";
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+    fetchTasks();
+  }, []);
 
-  const handleChange = (event) => {
-    setNewTask(event.target.value);
-  };
-
-  const addTask = (e) => {
-    e.preventDefault();
-    if (newTask.trim()) {
-      setTasks((prevTasks) => [...prevTasks, newTask]);
-      setNewTask("");
+  async function fetchTasks() {
+    try {
+      const res = await axios.get(endpoint);
+      setTasks(res.data);
+    } catch (err) {
+      console.error(err);
     }
-  };
+  }
 
-  const removeTask = (index) => {
-    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
-  };
+  async function addTask(e) {
+    e.preventDefault();
+    if (!newTask.trim()) return;
+    try {
+      await axios.post(endpoint, { task: newTask });
+      setNewTask("");
+      fetchTasks();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function removeTask(id) {
+    try {
+      await axios.delete(`${endpoint}/${id}`);
+      fetchTasks();
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <div className="rounded-2xl max-w-96 mt-10 bg-base-200 p-10 shadow-lg">
@@ -37,7 +50,9 @@ function Todo() {
           placeholder="What do you want to do?"
           className="input input-bordered w-full"
           value={newTask}
-          onChange={handleChange}
+          onChange={(e) => {
+            setNewTask(e.target.value);
+          }}
         />
         <button className="btn btn-primary">Add</button>
       </form>
@@ -46,10 +61,13 @@ function Todo() {
         id="todo-container"
         ref={listRef}
       >
-        {tasks.map((task, index) => (
-          <li key={index} onClick={() => removeTask(index)}>
-            <button className="btn btn-primary w-full h-16 text-xl">
-              {task}
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <button
+              className="btn btn-primary w-full h-16 text-xl"
+              onClick={() => removeTask(task.id)}
+            >
+              {task.task}
             </button>
           </li>
         ))}
