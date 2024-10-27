@@ -17,7 +17,8 @@ function Todo() {
     setNewTask(event.target.value);
   };
 
-  const addTask = () => {
+  const addTask = (e) => {
+    e.preventDefault();
     if (newTask.trim()) {
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setNewTask("");
@@ -30,7 +31,7 @@ function Todo() {
 
   return (
     <div className="rounded-box max-w-96 mt-10 bg-base-200 p-10 shadow-md">
-      <div className="flex gap-2">
+      <form className="flex gap-2" onSubmit={addTask}>
         <input
           type="text"
           placeholder="What do you want to do?"
@@ -38,10 +39,8 @@ function Todo() {
           value={newTask}
           onChange={handleChange}
         />
-        <button className="btn btn-accent" onClick={addTask}>
-          Add
-        </button>
-      </div>
+        <button className="btn btn-primary">Add</button>
+      </form>
       <ul
         className="w-full mt-8 flex flex-col gap-2"
         id="todo-container"
