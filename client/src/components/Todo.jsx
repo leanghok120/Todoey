@@ -30,7 +30,7 @@ function Todo() {
   };
 
   return (
-    <div className="rounded-box max-w-96 mt-10 bg-base-200 p-10 shadow-md">
+    <div className="rounded-2xl max-w-96 mt-10 bg-base-200 p-10 shadow-lg">
       <form className="flex gap-2" onSubmit={addTask}>
         <input
           type="text"
@@ -42,17 +42,15 @@ function Todo() {
         <button className="btn btn-primary">Add</button>
       </form>
       <ul
-        className="w-full mt-8 flex flex-col gap-2"
+        className="w-full mt-8 flex flex-col gap-2 overflow-y-scroll max-h-[500px]"
         id="todo-container"
         ref={listRef}
       >
         {tasks.map((task, index) => (
-          <li
-            className="bg-primary w-full h-16 rounded-md flex justify-center items-center text-neutral font-bold text-xl shadow-md cursor-pointer"
-            key={index}
-            onClick={() => removeTask(index)}
-          >
-            {task}
+          <li key={index} onClick={() => removeTask(index)}>
+            <button className="btn btn-primary w-full h-16 text-xl">
+              {task}
+            </button>
           </li>
         ))}
       </ul>
