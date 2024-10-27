@@ -29,7 +29,7 @@ function Todo() {
   };
 
   return (
-    <div className="rounded-box max-w-96 mt-24 bg-base-200 p-10 shadow-md">
+    <div className="rounded-box max-w-96 mt-10 bg-base-200 p-10 shadow-md">
       <div className="flex gap-2">
         <input
           type="text"
