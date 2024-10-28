@@ -8,7 +8,11 @@ const mongodb_uri = process.env.MONGODB_URI;
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_ORIGIN,
+  }),
+);
 
 // Connect to mongodb
 mongoose.connect(mongodb_uri, { useNewUrlParser: true });
