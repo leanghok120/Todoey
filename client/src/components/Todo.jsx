@@ -6,7 +6,7 @@ function Todo() {
   const [listRef] = useAutoAnimate();
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-  const endpoint = "http://localhost:8080/todos";
+  const endpoint = `${import.meta.env.VITE_BACKEND_URL}/todos`;
 
   useEffect(() => {
     fetchTasks();
@@ -61,11 +61,11 @@ function Todo() {
         id="todo-container"
         ref={listRef}
       >
-        {tasks.map((task) => (
-          <li key={task.id}>
+        {tasks.map((task, index) => (
+          <li key={index}>
             <button
               className="btn btn-primary w-full h-16 text-xl"
-              onClick={() => removeTask(task.id)}
+              onClick={() => removeTask(task._id)}
             >
               {task.task}
             </button>
