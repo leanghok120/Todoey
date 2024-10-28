@@ -23,5 +23,5 @@ app.get("/", (req, res) => {
 app.use("/todos", todosRoutes);
 
 app.listen(8080, () => {
-  console.log("Server is running on http://localhost:8080");
+  console.log("Server is running on port 8080");
 });
