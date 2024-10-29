@@ -14,7 +14,12 @@ function Todo() {
 
   async function fetchTasks() {
     try {
-      const res = await axios.get(endpoint);
+      const token = localStorage.getItem("token");
+      const res = await axios.get(endpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setTasks(res.data);
     } catch (err) {
       console.error(err);
@@ -25,7 +30,16 @@ function Todo() {
     e.preventDefault();
     if (!newTask.trim()) return;
     try {
-      await axios.post(endpoint, { task: newTask });
+      const token = localStorage.getItem("token");
+      await axios.post(
+        endpoint,
+        { task: newTask },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       setNewTask("");
       fetchTasks();
     } catch (err) {
@@ -35,7 +49,12 @@ function Todo() {
 
   async function removeTask(id) {
     try {
-      await axios.delete(`${endpoint}/${id}`);
+      const token = localStorage.getItem("token");
+      await axios.delete(`${endpoint}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       fetchTasks();
     } catch (err) {
       console.error(err);
