@@ -29,25 +29,32 @@ function Todo() {
   async function addTask(e) {
     e.preventDefault();
     if (!newTask.trim()) return;
+    const taskToAdd = { task: newTask };
+
+    // Add new task to ui
+    setTasks([...tasks, taskToAdd]);
+    setNewTask("");
+
     try {
       const token = localStorage.getItem("token");
-      await axios.post(
-        endpoint,
-        { task: newTask },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.post(endpoint, taskToAdd, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
-      setNewTask("");
+      });
       fetchTasks();
     } catch (err) {
       console.error(err);
+      setTasks(tasks); // Revert tasks in ui
     }
   }
 
   async function removeTask(id) {
+    const originalTasks = [...tasks];
+
+    // Remove task from ui
+    setTasks(tasks.filter((task) => task._id != id));
+
     try {
       const token = localStorage.getItem("token");
       await axios.delete(`${endpoint}/${id}`, {
@@ -58,6 +65,7 @@ function Todo() {
       fetchTasks();
     } catch (err) {
       console.error(err);
+      setTasks(originalTasks); // Revert tasks in ui
     }
   }
 
