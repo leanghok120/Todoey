@@ -16,6 +16,13 @@ export default function Signup() {
         username: username,
         password: password,
       });
+
+      const res = await axios.post(`${endpoint}/auth/login`, {
+        username: username,
+        password: password,
+      });
+
+      localStorage.setItem("token", res.data);
       navigate("/");
     } catch (err) {
       console.log(err);
