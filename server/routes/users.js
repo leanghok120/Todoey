@@ -26,6 +26,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+// Login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
@@ -38,10 +39,14 @@ router.post("/login", async (req, res) => {
   res.json(token);
 });
 
-router.get("/me", verifyToken, (req, res) => {
-  const { id } = req.user;
-
-  res.json({ id: id });
+// Me
+router.get("/me", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 export default router;
