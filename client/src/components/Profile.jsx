@@ -1,9 +1,15 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 export default function Profile() {
   const [username, setUsername] = useState("User");
   const endpoint = import.meta.env.VITE_BACKEND_URL;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
 
   async function fetchInfo() {
     const token = localStorage.getItem("token");
@@ -22,9 +28,10 @@ export default function Profile() {
     }
   }
 
-  useEffect(() => {
-    fetchInfo();
-  }, []);
+  function logout() {
+    localStorage.removeItem("token");
+    navigate("/signup");
+  }
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">
@@ -34,6 +41,9 @@ export default function Profile() {
         <h1 className="text-3xl font-bold">
           Welcome, <span className="font-black">{username}</span>!
         </h1>
+        <button className="btn btn-warning mt-5" onClick={logout}>
+          Logout
+        </button>
       </div>
     </div>
   );
