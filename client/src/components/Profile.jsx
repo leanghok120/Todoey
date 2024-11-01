@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import HomeBtn from "./HomeBtn";
 
 export default function Profile() {
   const [username, setUsername] = useState("User");
@@ -35,6 +36,8 @@ export default function Profile() {
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">
+      <HomeBtn />
+
       <h1 className="font-black text-center text-6xl p-3">Profile</h1>
 
       <div className="rounded-2xl max-w-96 mt-10 bg-base-200 p-10 shadow-lg flex flex-col gap-2">
