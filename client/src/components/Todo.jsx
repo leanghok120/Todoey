@@ -84,7 +84,7 @@ function Todo() {
         <button className="btn btn-primary">Add</button>
       </form>
       <ul
-        className="w-full mt-8 flex flex-col gap-2 overflow-y-scroll max-h-[500px]"
+        className="w-full mt-8 flex flex-col gap-2"
         id="todo-container"
         ref={listRef}
       >
