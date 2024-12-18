@@ -22,13 +22,13 @@ export default function Index() {
         <Button>Add</Button>
       </Form>
       <ul className="space-y-2">
-        <li className="bg-background p-5 rounded-lg shadow-sm text-center">
+        <li className="bg-background p-4 rounded-lg shadow-sm text-center">
           Learn remix
         </li>
-        <li className="bg-background p-5 rounded-lg shadow-sm text-center">
+        <li className="bg-background p-4 rounded-lg shadow-sm text-center">
           Learn shadcn ui
         </li>
-        <li className="bg-background p-5 rounded-lg shadow-sm text-center">
+        <li className="bg-background p-4 rounded-lg shadow-sm text-center">
           Build a todo app
         </li>
       </ul>
