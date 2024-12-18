@@ -15,31 +15,23 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <>
-      <h1 className="font-bold text-5xl">Todoey</h1>
-      <main className="w-full max-w-96 flex flex-col justify-center items-center gap-4 mt-8 p-8 rounded-xl border shadow-md">
-        <Form className="flex gap-2">
-          <Input placeholder="What do you want to do?" />
-          <Button>Add</Button>
-        </Form>
-        <ul className="text-center space-y-3 w-3/4">
-          <li>
-            <Button className="w-full" variant="outline">
-              Learn remix
-            </Button>
-          </li>
-          <li>
-            <Button className="w-full" variant="outline">
-              Learn drizzle
-            </Button>
-          </li>
-          <li>
-            <Button className="w-full" variant="outline">
-              Build a todo app
-            </Button>
-          </li>
-        </ul>
-      </main>
-    </>
+    <div className="max-w-96 p-8 bg-muted rounded-xl shadow border">
+      <h1 className="text-4xl font-bold text-center mb-6">Todoey</h1>
+      <Form className="flex gap-2 mb-4">
+        <Input placeholder="Add a new task" className="flex-1" />
+        <Button>Add</Button>
+      </Form>
+      <ul className="space-y-2">
+        <li className="bg-background p-5 rounded-lg shadow-sm text-center">
+          Learn remix
+        </li>
+        <li className="bg-background p-5 rounded-lg shadow-sm text-center">
+          Learn shadcn ui
+        </li>
+        <li className="bg-background p-5 rounded-lg shadow-sm text-center">
+          Build a todo app
+        </li>
+      </ul>
+    </div>
   );
 }
