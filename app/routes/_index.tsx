@@ -16,14 +16,25 @@ export const meta: MetaFunction = () => {
 
 export async function action({ request }) {
   const formData = await request.formData();
-  const task = await formData.get("task");
+  const actionType = formData.get("_action");
+  const taskId = formData.get("id");
 
-  return await db.task.create({ data: { task: task } });
+  if (actionType === "create") {
+    const task = formData.get("task");
+    if (!task) throw new Error("Task is required.");
+    return await db.task.create({ data: { task: task } });
+  }
+
+  if (actionType === "delete" && taskId) {
+    await db.task.delete({ where: { id: parseInt(taskId) } });
+    return null;
+  }
+
+  throw new Error("Invalid action.");
 }
 
 export async function loader() {
   const tasks = await db.task.findMany();
-
   return tasks;
 }
 
@@ -40,16 +51,32 @@ export default function Index() {
           name="task"
           id="task"
         />
-        <Button>Add</Button>
+        <Button name="_action" value="create">
+          Add
+        </Button>
       </Form>
       <ul className="space-y-2">
         {tasks.map((task) => (
-          <li
-            className="bg-background p-4 rounded-lg shadow-sm text-center"
-            key={task.id}
-          >
-            {task.task}
-          </li>
+          <Form method="post" key={task.id}>
+            <li
+              className="bg-background p-4 rounded-lg shadow-sm text-center cursor-pointer"
+              onClick={() =>
+                document.getElementById(`delete-${task.id}`)?.click()
+              }
+            >
+              {task.task}
+            </li>
+            <input type="hidden" name="id" value={task.id} />
+            <button
+              id={`delete-${task.id}`}
+              type="submit"
+              name="_action"
+              value="delete"
+              className="hidden"
+            >
+              Delete
+            </button>
+          </Form>
         ))}
       </ul>
     </div>
