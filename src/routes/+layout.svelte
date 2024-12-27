@@ -4,8 +4,13 @@
 	import '../app.css';
 </script>
 
+<svelte:head>
+	<title>Todoey</title>
+</svelte:head>
+
 <ToggleTheme />
 <ModeWatcher />
+
 <main class="flex min-h-screen flex-col items-center justify-center">
 	<slot />
 </main>
