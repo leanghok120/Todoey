@@ -1,6 +1,9 @@
 <script lang="ts">
+	import ToggleTheme from '$lib/components/ui/ToggleTheme.svelte';
+	import { ModeWatcher } from 'mode-watcher';
 	import '../app.css';
-	let { children } = $props();
 </script>
 
-{@render children()}
+<ToggleTheme />
+<ModeWatcher />
+<slot />
