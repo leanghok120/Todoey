@@ -6,4 +6,6 @@
 
 <ToggleTheme />
 <ModeWatcher />
-<slot />
+<main class="flex min-h-screen flex-col items-center justify-center">
+	<slot />
+</main>
