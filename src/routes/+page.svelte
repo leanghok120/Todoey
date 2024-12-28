@@ -26,6 +26,11 @@
 
 		newTask = '';
 	}
+
+	async function deleteTask(taskId) {
+		await fetch(`/api/todos/${taskId}`, { method: 'DELETE' });
+		invalidate('/api/todos');
+	}
 </script>
 
 <h1 class="text-4xl font-black">Todoey</h1>
@@ -47,7 +52,9 @@
 		<ul class="mt-5 space-y-2">
 			{#each data.tasks as task}
 				<li>
-					<Button class="w-full" variant="outline">{task.task}</Button>
+					<Button class="w-full" variant="outline" onclick={() => deleteTask(task.id)}
+						>{task.task}</Button
+					>
 				</li>
 			{/each}
 		</ul>
