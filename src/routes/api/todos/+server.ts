@@ -8,3 +8,12 @@ export const GET: RequestHandler = async () => {
 
 	return json(tasks);
 };
+
+// /api/todos POST
+export const POST: RequestHandler = async ({ request }) => {
+	const formData = await request.formData();
+	const task = formData.get('task');
+
+	const newTask = await db.task.create({ data: { task: task } });
+	return json(newTask, { status: 201 });
+};
