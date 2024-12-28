@@ -47,7 +47,7 @@
 	</form>
 
 	{#if data.tasks.length === 0}
-		<p>No tasks yet. Add your first task!</p>
+		<p class="mt-5">No tasks yet. Add your first task!</p>
 	{:else}
 		<ul class="mt-5 space-y-2">
 			{#each data.tasks as task}
