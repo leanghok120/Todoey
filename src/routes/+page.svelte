@@ -47,8 +47,7 @@
 		<ul class="mt-5 space-y-2">
 			{#each data.tasks as task}
 				<li>
-					<form method="POST" action="?/deleteTask" use:enhance>
-						<input type="hidden" name="id" value={task.id} />
+					<form method="POST" action="?/deleteTask&id={task.id}" use:enhance>
 						<Button class="w-full" variant="outline" type="submit">{task.task}</Button>
 					</form>
 				</li>

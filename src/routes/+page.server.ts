@@ -22,9 +22,8 @@ export const actions: Actions = {
 		return { success: true };
 	},
 
-	deleteTask: async ({ request }) => {
-		const formData = await request.formData();
-		const id = Number(formData.get('id'));
+	deleteTask: async ({ url }) => {
+		const id = Number(url.searchParams.get('id'));
 
 		await db.task.delete({ where: { id: id } });
 		return { success: true };
