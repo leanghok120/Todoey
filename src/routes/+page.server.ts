@@ -14,7 +14,7 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const task = String(formData.get('task'));
 
-		if (!task) {
+		if (!task.trim()) {
 			return fail(400, { task, missing: true });
 		}
 
