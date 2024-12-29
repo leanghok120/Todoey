@@ -1,41 +1,17 @@
 <script lang="ts">
-	import { invalidate } from '$app/navigation';
+	import { enhance } from '$app/forms';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
-	import type { Task } from '@prisma/client';
+	import type { PageData } from './$types';
 
-	let { data }: { tasks: Task[] } = $props();
+	let { data }: PageData = $props();
 
 	let newTask = $state('');
-
-	async function addTask(e: SubmitEvent) {
-		e.preventDefault();
-
-		if (newTask.trim()) {
-			const formData = new FormData();
-			formData.append('task', newTask);
-
-			const response = await fetch('/api/todos', { method: 'POST', body: formData });
-
-			if (response.ok) {
-				invalidate('/api/todos');
-			} else {
-				console.error('Failed to add task');
-			}
-		}
-
-		newTask = '';
-	}
-
-	async function deleteTask(taskId) {
-		await fetch(`/api/todos/${taskId}`, { method: 'DELETE' });
-		invalidate('/api/todos');
-	}
 </script>
 
 <h1 class="text-4xl font-black">Todoey</h1>
 <div class="mt-6 max-w-96 rounded-xl border p-8">
-	<form class="flex w-full items-center gap-2" onsubmit={addTask}>
+	<form class="flex w-full items-center gap-2" method="POST" action="?/addTask" use:enhance>
 		<Input
 			type="text"
 			placeholder="What do  you want to do?"
@@ -52,9 +28,10 @@
 		<ul class="mt-5 space-y-2">
 			{#each data.tasks as task}
 				<li>
-					<Button class="w-full" variant="outline" onclick={() => deleteTask(task.id)}
-						>{task.task}</Button
-					>
+					<form method="POST" action="?/deleteTask" use:enhance>
+						<input type="hidden" name="id" value={task.id} />
+						<Button class="w-full" variant="outline" type="submit">{task.task}</Button>
+					</form>
 				</li>
 			{/each}
 		</ul>
