@@ -38,7 +38,7 @@
 		</Button>
 	</form>
 	{#if form?.missing}
-		<p class="error">Task is required</p>
+		<p class="text-red-500">Task is required</p>
 	{/if}
 
 	{#if data.tasks.length === 0}
@@ -55,9 +55,3 @@
 		</ul>
 	{/if}
 </div>
-
-<style>
-	.error {
-		color: tomato;
-	}
-</style>
