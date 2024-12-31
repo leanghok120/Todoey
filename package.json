@@ -10,16 +10,21 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"generate": "drizzle-kit generate",
+		"push": "drizzle-kit push",
+		"studio": "drizzle-kit studio"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
+		"@types/node": "^22.10.2",
 		"autoprefixer": "^10.4.20",
 		"bits-ui": "^0.22.0",
 		"clsx": "^2.1.1",
+		"drizzle-kit": "^0.30.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
@@ -37,6 +42,9 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
+		"@neondatabase/serverless": "^0.10.4",
+		"dotenv": "^16.4.7",
+		"drizzle-orm": "^0.38.3",
 		"lucide-svelte": "^0.469.0",
 		"mode-watcher": "^0.5.0"
 	}
