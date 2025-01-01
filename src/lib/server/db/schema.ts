@@ -1,6 +1,27 @@
-import { pgTable, text, integer } from 'drizzle-orm/pg-core';
+import { pgTable, text, integer, timestamp } from 'drizzle-orm/pg-core';
 
 export const tasksTable = pgTable('tasks', {
 	id: integer().primaryKey().generatedAlwaysAsIdentity(),
-	task: text('task')
+	task: text('task'),
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id)
 });
+
+export const user = pgTable('user', {
+	id: text('id').primaryKey(),
+	username: text('username').notNull().unique(),
+	passwordHash: text('password_hash').notNull()
+});
+
+export const session = pgTable('session', {
+	id: text('id').primaryKey(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id),
+	expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull()
+});
+
+export type Session = typeof session.$inferSelect;
+
+export type User = typeof user.$inferSelect;

@@ -43,6 +43,9 @@
 	},
 	"dependencies": {
 		"@neondatabase/serverless": "^0.10.4",
+		"@node-rs/argon2": "^1.1.0",
+		"@oslojs/crypto": "^1.0.1",
+		"@oslojs/encoding": "^1.1.0",
 		"dotenv": "^16.4.7",
 		"drizzle-orm": "^0.38.3",
 		"lucide-svelte": "^0.469.0",

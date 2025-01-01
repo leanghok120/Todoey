@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import type { ActionData, PageData, SubmitFunction } from './$types';
-	import { LoaderCircle } from 'lucide-svelte';
+	import { LoaderCircle, LogOut } from 'lucide-svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -19,6 +19,13 @@
 		};
 	};
 </script>
+
+<form action="?/logout" method="POST">
+	<Button variant="outline" size="icon" class="absolute left-5 top-5" type="submit">
+		<LogOut />
+		<span class="sr-only">Logout</span>
+	</Button>
+</form>
 
 <h1 class="text-4xl font-black">Todoey</h1>
 <div class="mt-6 max-w-96 rounded-xl border p-8">
